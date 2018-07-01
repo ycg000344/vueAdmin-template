@@ -44,6 +44,12 @@ export default new Router({
   routes: constantRouterMap
 })
 
+export const componentsMap = {
+  example_table: () => import('@/views/table/index'),
+  example_tree: () => import('@/views/tree/index'),
+  form_index: () => import('@/views/form/index')
+}
+
 export const asyncRouterMap = [
   {
     path: '/example',
