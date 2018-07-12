@@ -1,43 +1,47 @@
 <template>
   <div class="app-container">
     <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-      <el-table-column align="center" label='ID' width="95">
+      <el-table-column align="center" label='序号' width="95">
         <template slot-scope="scope">
-          {{scope.$index}}
+          {{scope.$index + 1 }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column align="center" prop="created_at" label="user_id" width="200">
         <template slot-scope="scope">
-          {{scope.row.title}}
+          <span>{{scope.row.createUser}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column align="center" prop="created_at" label="user_name" width="200">
         <template slot-scope="scope">
-          <span>{{scope.row.author}}</span>
+          <span>{{scope.row.createName}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column align="center" prop="created_at" label="host" width="200">
         <template slot-scope="scope">
-          {{scope.row.pageviews}}
+          <span>{{scope.row.createHost}}</span>
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column class-name="status-col" label="请求资源" width="150" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          <span>{{scope.row.uri}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column label="操作方法" width="120" align="center">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
+          {{scope.row.opt}}
         </template>
       </el-table-column>
+      <el-table-column align="center" prop="created_at" label="创建时间" width="200">
+        <template slot-scope="scope">
+          <span>{{scope.row.createTime}}</span>
+        </template>
+      </el-table-column> 
     </el-table>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { page } from '@/api/optlog'
 
 export default {
   data() {
@@ -62,8 +66,8 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.items
+      page(this.listQuery).then(response => {
+        this.list = response.data.rows
         this.listLoading = false
       })
     }
