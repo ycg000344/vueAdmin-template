@@ -102,8 +102,7 @@ export const constantRouterMap = [
     children: [
       { path: 'dynamic-table', component: () => import('@/views/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
       { path: 'tree-table', component: () => import('@/views/table/treeTable/treeTable'), name: 'treeTableDemo', meta: { title: 'treeTable' }},
-      { path: 'custom-tree-table', component: () => import('@/views/table/treeTable/customTreeTable'), name: 'customTreeTableDemo', meta: { title: 'customTreeTable' }},
-      { path: 'complex-table', component: () => import('@/views/table/optlog'), name: 'complexTable', meta: { title: 'complexTable' }}
+      { path: 'custom-tree-table', component: () => import('@/views/table/treeTable/customTreeTable'), name: 'customTreeTableDemo', meta: { title: 'customTreeTable' }}
     ]
   }
 ]
@@ -117,6 +116,7 @@ export default new Router({
 export const componentsMap = {
   example_table: () => import('@/views/table/index'),
   example_tree: () => import('@/views/tree/index'),
-  form_index: () => import('@/views/form/index')
+  form_index: () => import('@/views/form/index'),
+  bascimanager_optlog: () => import('@/views/table/index')
 }
 

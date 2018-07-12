@@ -56,7 +56,11 @@ export default {
     exportZip: 'Export Zip',
     theme: 'Theme',
     clipboardDemo: 'Clipboard',
-    i18n: 'I18n'
+    i18n: 'I18n',
+    table: 'Table',
+    tree: 'Tree',
+    bascimanager: 'Bascimanager',
+    optlog: 'Optlog'
   },
   navbar: {
     logOut: 'Log Out',
