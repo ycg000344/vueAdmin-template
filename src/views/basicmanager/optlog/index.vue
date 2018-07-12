@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { page } from '@/api/basicmanager/optlog'
 
 export default {
   data() {
@@ -65,6 +66,11 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
+      page(this.listQuery).then(response => {
+        this.list = response.data.rows
+        this.total = response.data.total
+        this.listLoading = false
+      })
     },
     handleSizeChange(val) {
       this.listQuery.limit = val

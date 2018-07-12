@@ -114,9 +114,9 @@ export default new Router({
 })
 
 export const componentsMap = {
-  example_table: () => import('@/views/table/index'),
-  example_tree: () => import('@/views/tree/index'),
-  form_index: () => import('@/views/form/index'),
-  bascimanager_optlog: () => import('@/views/table/index')
+  // example_table: () => import('@/views/table/index'),
+  // example_tree: () => import('@/views/tree/index'),
+  // form_index: () => import('@/views/form/index'),
+  bascimanager_optlog: () => import('@/views/basicmanager/optlog')
 }
 
