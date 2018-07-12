@@ -3,7 +3,7 @@
     <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
       <el-table-column align="center" label='序号' >
         <template slot-scope="scope">
-          {{scope.$index + 1 }}
+          <span>{{scope.row.logId}}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="user_id" >
@@ -37,6 +37,11 @@
         </template>
       </el-table-column> 
     </el-table>
+
+    <div class="pagination-container">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -47,29 +52,33 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+      total: null,
+      listLoading: true,
+      listQuery: {
+        page: 1,
+        limit: 10
       }
-      return statusMap[status]
     }
   },
   created() {
-    this.fetchData()
+    this.getList()
   },
   methods: {
-    fetchData() {
+    getList() {
       this.listLoading = true
       page(this.listQuery).then(response => {
         this.list = response.data.rows
+        this.total = response.data.total
         this.listLoading = false
       })
+    },
+    handleSizeChange(val) {
+      this.listQuery.limit = val
+      this.getList()
+    },
+    handleCurrentChange(val) {
+      this.listQuery.page = val
+      this.getList()
     }
   }
 }
