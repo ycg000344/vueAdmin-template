@@ -1,37 +1,37 @@
 <template>
   <div class="app-container">
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-      <el-table-column align="center" label='序号' >
+    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row @sort-change="sort">
+      <el-table-column align="center" prop="log_id" label='序号' sortable="custom" >
         <template slot-scope="scope">
           <span>{{scope.row.logId}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="user_id" >
+      <el-table-column align="center" prop="create_user" label="用户id" sortable="custom"  >
         <template slot-scope="scope">
           <span>{{scope.row.createUser}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="user_name" >
+      <el-table-column align="center" prop="create_uame" label="昵称" >
         <template slot-scope="scope">
           <span>{{scope.row.createName}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="host" >
+      <el-table-column align="center" prop="create_host" label="主机" >
         <template slot-scope="scope">
           <span>{{scope.row.createHost}}</span>
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="请求资源"  align="center">
+      <el-table-column align="center" prop="uri" label="请求资源" sortable="custom">
         <template slot-scope="scope">
           <span>{{scope.row.uri}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作方法"  align="center">
+      <el-table-column align="center" prop="opt"  label="操作方法" >
         <template slot-scope="scope">
           {{scope.row.opt}}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="创建时间" >
+      <el-table-column align="center" prop="create_time" label="创建时间" sortable="custom"  >
         <template slot-scope="scope">
           <span>{{scope.row.createTime}}</span>
         </template>
@@ -56,7 +56,9 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 10
+        limit: 10,
+        prop: 'create_time', // 排序字段
+        order: 'desc'// 排序方式
       }
     }
   },
@@ -78,6 +80,11 @@ export default {
     },
     handleCurrentChange(val) {
       this.listQuery.page = val
+      this.getList()
+    },
+    sort(column) {
+      this.listQuery.prop = column.prop
+      this.listQuery.order = column.order.replace('ending', '')
       this.getList()
     }
   }
