@@ -64,7 +64,8 @@ export default {
     table: 'Table',
     tree: 'Tree',
     bascimanager: 'Bascimanager',
-    optlog: 'Optlog'
+    optlog: 'Optlog',
+    routers: 'Routers'
   },
   navbar: {
     logOut: 'Log Out',

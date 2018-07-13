@@ -64,7 +64,8 @@ export default {
     table: '表格',
     tree: '树形表格',
     bascimanager: '基础管理',
-    optlog: '操作日志'
+    optlog: '操作日志',
+    routers: '菜单'
   },
   navbar: {
     logOut: '退出登录',

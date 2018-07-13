@@ -103,7 +103,8 @@ export const constantRouterMap = [
       { path: 'dynamic-table', component: () => import('@/views/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
       { path: 'tree-table', component: () => import('@/views/table/treeTable/treeTable'), name: 'treeTableDemo', meta: { title: 'treeTable' }},
       { path: 'custom-tree-table', component: () => import('@/views/table/treeTable/customTreeTable'), name: 'customTreeTableDemo', meta: { title: 'customTreeTable' }},
-      { path: 'tree', component: () => import('@/views/tree/index'), name: 'tree', meta: { title: 'tree' }}
+      { path: 'tree', component: () => import('@/views/tree/index'), name: 'tree', meta: { title: 'tree' }},
+      { path: 'routers', component: () => import('@/views/basicmanager/routers'), name: 'routers', meta: { title: 'routers' }}
     ]
   }
 ]
