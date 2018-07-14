@@ -103,8 +103,7 @@ export const constantRouterMap = [
       { path: 'dynamic-table', component: () => import('@/views/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
       { path: 'tree-table', component: () => import('@/views/table/treeTable/treeTable'), name: 'treeTableDemo', meta: { title: 'treeTable' }},
       { path: 'custom-tree-table', component: () => import('@/views/table/treeTable/customTreeTable'), name: 'customTreeTableDemo', meta: { title: 'customTreeTable' }},
-      { path: 'tree', component: () => import('@/views/tree/index'), name: 'tree', meta: { title: 'tree' }},
-      { path: 'routers', component: () => import('@/views/basicmanager/routers'), name: 'routers', meta: { title: 'routers' }}
+      { path: 'tree', component: () => import('@/views/tree/index'), name: 'tree', meta: { title: 'tree' }}
     ]
   }
 ]
@@ -119,6 +118,7 @@ export const componentsMap = {
   // example_table: () => import('@/views/table/index'),
   // example_tree: () => import('@/views/tree/index'),
   // form_index: () => import('@/views/form/index'),
-  bascimanager_optlog: () => import('@/views/basicmanager/optlog')
+  bascimanager_optlog: () => import('@/views/basicmanager/optlog'),
+  bascimanager_routers: () => import('@/views/basicmanager/routers')
 }
 
