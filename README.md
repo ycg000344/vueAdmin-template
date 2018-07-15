@@ -2,9 +2,13 @@
 
 **前排致谢@[老A](https://github.com/wxiaoqi) 、@[潘大](https://github.com/PanJiaChen)**
 
-基于Spring Cloud的开发平台，具有统一授权、认证后台管理系统。核心技术采用Eureka、Fegin、Ribbon、Zuul、Hystrix、JWT Token、Mybatis等主要框架和中间件。配套前端代码git地址：https://github.com/ycg000344/vueAdmin-template.git
+基于Spring Cloud的开发平台，具有统一授权、认证后台管理系统。核心技术采用Eureka、Fegin、Ribbon、Zuul、Hystrix、JWT Token、Mybatis等主要框架和中间件。
 
-*[线上地址(腾讯云的廉价小水管,望手下留情)](http://111.230.220.114/)*
+[配套前端代码git](https://github.com/ycg000344/vueAdmin-template.git)
+
+[日常知识备忘录](https://ycg000344.github.io/)
+
+[线上地址(腾讯云的廉价小水管,望手下留情)](http://111.230.220.114/)
 ## 模块说明
 
 ![引用老A](https://camo.githubusercontent.com/fa090fc7a58baacfca946c1c0524c11fbf9b0e02/687474703a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f353730303333352d386436396634653838356134656338352e706e673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430)
