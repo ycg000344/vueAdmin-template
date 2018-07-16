@@ -2,24 +2,25 @@
     <div class="app-container">
         <el-row :gutter="20">
             <!-- 一级菜单 -->
-            <el-col :span="4">
-                <div>
-                  <h3><span>这里是一级菜单表格区域</span></h3>
-                </div>
+            <el-col :span="3">
                 <div>
                     <ul>
-                        <li v-for=" item in parentRouters" :key="item.routerId " @click="change(item.routerId)">
-                            <span >{{item.name}}</span>
-                            <i :class="{ 'el-icon-success' : item.routerId == listQuery.routerParentId }"></i>
-                        </li>
-                    </ul>
+                      <li v-for=" item in parentRouters" :key="item.routerId " >
+                        <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
+                          <span v-if="item.status == 1">
+                            {{item.name}}
+                          </span>
+                          <span v-else :title="isDisabled">
+                            <s>{{item.name}}</s>
+                          </span>
+                        </el-button>
+                        <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i>
+                      </li>
+                  </ul>
                 </div>
             </el-col>
             <!-- 二级菜单 -->
-            <el-col :span="20">
-                <div>
-                  <h3><span>这里是二级菜单表格区域</span></h3>
-                </div>
+            <el-col :span="21">
                 <div>
                   <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row >
                     <el-table-column align="center" prop="routerId" label='序号'  >
@@ -74,6 +75,7 @@ export default {
   name: 'routers-component',
   data() {
     return {
+      isDisabled: '当前标题处于禁用状态', //
       parentRouters: null,
       list: null,
       total: null,
@@ -128,8 +130,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+ul {
+  list-style-type:none;
+}
+.onClicked {
+  color: #F56C6C
+}
 
 
 
