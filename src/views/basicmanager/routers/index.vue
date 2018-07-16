@@ -17,7 +17,6 @@
                         </span>
                         <el-tag size="mini">{{item.status | statusFilter}}</el-tag>
                       </el-button>
-                      <!-- <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i> -->
                     </li>
                 </ul>
               </div>
@@ -89,7 +88,6 @@ export default {
   },
   data() {
     return {
-      isDisabled: '当前标题处于禁用状态', //
       parentRouters: null,
       list: null,
       total: null,
