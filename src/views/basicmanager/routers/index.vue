@@ -5,21 +5,19 @@
             <el-col :span="4">
               <div>
                 <!-- <el-button type="primary" icon="el-icon-plus" size="mini"  round>新增</el-button> -->
-                <el-button type="primary" icon="el-icon-edit" size="mini"  round @click="changeStatus(1)">启用</el-button>
-                <el-button type="primary" icon="el-icon-edit" size="mini"  round @click="changeStatus(0)">禁用</el-button>
+                <el-button type="primary" size="mini" v-waves round @click="changeStatus(1)">启用</el-button>
+                <el-button type="warning" size="mini" v-waves round @click="changeStatus(0)">禁用</el-button>
               </div0
               <div>
                   <ul>
                     <li v-for=" item in parentRouters" :key="item.routerId " >
                       <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
-                        <span v-if="item.status == 1">
+                        <span>
                           {{item.name}}
                         </span>
-                        <span v-else :title="isDisabled">
-                          <s>{{item.name}}</s>
-                        </span>
+                        <el-tag size="mini">{{item.status | statusFilter}}</el-tag>
                       </el-button>
-                      <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i>
+                      <!-- <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i> -->
                     </li>
                 </ul>
               </div>
@@ -58,10 +56,16 @@
                         <span>{{scope.row.createTime}}</span>
                       </template>
                     </el-table-column>   
-                    <el-table-column align="center" prop="status" label='可用状态'  >
+                    <el-table-column align="center" prop="status" label='使用状态'  >
                       <template slot-scope="scope">
-                        <span>{{scope.row.status}}</span>
+                        <span>{{scope.row.status | statusFilter }}</span>
                       </template>
+                    </el-table-column>
+                      <el-table-column align="center" label="操作" width="230" class-name="small-padding fixed-width">
+                        <template slot-scope="scope">
+                          <el-button size="mini" type="primary" @click="handleModifyStatus(scope.row,1)" round v-waves >启用</el-button>
+                          <el-button size="mini" type="warning" @click="handleModifyStatus(scope.row,0)" round v-waves >禁用</el-button>
+                        </template>
                     </el-table-column>
                   </el-table>
                 <div class="pagination-container">
@@ -76,8 +80,13 @@
 
 <script>
 import { parents, children, update } from '@/api/basicmanager/routers'
+import waves from '@/directive/waves' // 水波纹指令
+
 export default {
   name: 'routers-component',
+  directives: {
+    waves
+  },
   data() {
     return {
       isDisabled: '当前标题处于禁用状态', //
@@ -131,6 +140,30 @@ export default {
       const _router = this.parentRouters.find(item => {
         return item.routerId === this.listQuery.routerParentId
       })
+      this.handleModifyStatus(_router, status)
+      // if (status === _router.status) {
+      //   this.$message({
+      //     message: '操作无效！',
+      //     type: 'warning'
+      //   })
+      // } else {
+      //   const router = {
+      //     routerId: _router.routerId,
+      //     status: status
+      //   }
+      //   update(router).then(response => {
+      //     this.getParents()
+      //     this.$message({
+      //       message: '操作成功',
+      //       type: 'success'
+      //     })
+      //   }).catch(err => {
+      //     console.log(err)
+      //     this.$message.error('操作失败！')
+      //   })
+      // }
+    },
+    handleModifyStatus(_router, status) {
       if (status === _router.status) {
         this.$message({
           message: '操作无效！',
@@ -156,6 +189,15 @@ export default {
   },
   created() {
     this.getParents()
+  },
+  filters: {
+    statusFilter(status) {
+      const statusMap = {
+        0: '被禁用',
+        1: '使用中'
+      }
+      return statusMap[status]
+    }
   }
 
 }
