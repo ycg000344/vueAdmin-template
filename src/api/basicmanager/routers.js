@@ -19,3 +19,14 @@ export function children(params) {
     params
   })
 }
+/**
+ *更新路由信息
+ * @param {*} params
+ */
+export function update(data) {
+  return request({
+    url: '/basic/router/' + data.routerId,
+    method: 'put',
+    data
+  })
+}

@@ -2,25 +2,30 @@
     <div class="app-container">
         <el-row :gutter="20">
             <!-- 一级菜单 -->
-            <el-col :span="3">
-                <div>
-                    <ul>
-                      <li v-for=" item in parentRouters" :key="item.routerId " >
-                        <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
-                          <span v-if="item.status == 1">
-                            {{item.name}}
-                          </span>
-                          <span v-else :title="isDisabled">
-                            <s>{{item.name}}</s>
-                          </span>
-                        </el-button>
-                        <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i>
-                      </li>
-                  </ul>
-                </div>
+            <el-col :span="4">
+              <div>
+                <!-- <el-button type="primary" icon="el-icon-plus" size="mini"  round>新增</el-button> -->
+                <el-button type="primary" icon="el-icon-edit" size="mini"  round @click="changeStatus(1)">启用</el-button>
+                <el-button type="primary" icon="el-icon-edit" size="mini"  round @click="changeStatus(0)">禁用</el-button>
+              </div0
+              <div>
+                  <ul>
+                    <li v-for=" item in parentRouters" :key="item.routerId " >
+                      <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
+                        <span v-if="item.status == 1">
+                          {{item.name}}
+                        </span>
+                        <span v-else :title="isDisabled">
+                          <s>{{item.name}}</s>
+                        </span>
+                      </el-button>
+                      <i :class="{ 'el-icon-check' : item.routerId == listQuery.routerParentId }"></i>
+                    </li>
+                </ul>
+              </div>
             </el-col>
             <!-- 二级菜单 -->
-            <el-col :span="21">
+            <el-col :span="20">
                 <div>
                   <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row >
                     <el-table-column align="center" prop="routerId" label='序号'  >
@@ -70,7 +75,7 @@
 </template>
 
 <script>
-import { parents, children } from '@/api/basicmanager/routers'
+import { parents, children, update } from '@/api/basicmanager/routers'
 export default {
   name: 'routers-component',
   data() {
@@ -121,6 +126,32 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val
       this.getChildren()
+    },
+    changeStatus(status) {
+      const _router = this.parentRouters.find(item => {
+        return item.routerId === this.listQuery.routerParentId
+      })
+      if (status === _router.status) {
+        this.$message({
+          message: '操作无效！',
+          type: 'warning'
+        })
+      } else {
+        const router = {
+          routerId: _router.routerId,
+          status: status
+        }
+        update(router).then(response => {
+          this.getParents()
+          this.$message({
+            message: '操作成功',
+            type: 'success'
+          })
+        }).catch(err => {
+          console.log(err)
+          this.$message.error('操作失败！')
+        })
+      }
     }
   },
   created() {
