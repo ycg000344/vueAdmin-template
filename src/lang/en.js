@@ -75,8 +75,8 @@ export default {
     theme: 'theme'
   },
   login: {
-    title: 'Login Form',
-    logIn: 'Log in',
+    title: 'Sign in wm.program',
+    logIn: 'Sign in',
     username: 'Username',
     password: 'Password',
     any: 'any',
