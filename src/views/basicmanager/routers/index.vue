@@ -187,13 +187,12 @@ ul {
 .onClicked {
   color: #F56C6C
 }
-
 .mainlist {
-    margin: 10px 20px;
-    border-bottom: 1px dashed #d2d3d2;
-    text-align: center;
-    button {
-      width: 80%;
-    }
+  margin: 10px 20px;
+  border-bottom: 1px dashed #d2d3d2;
+  text-align: center;
+  button {
+    width: 80%;
   }
+}
 </style>
