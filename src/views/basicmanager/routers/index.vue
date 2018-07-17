@@ -4,66 +4,66 @@
             <!-- 一级菜单 -->
             <el-col :span="4">
               <div>
-                <!-- <el-button type="primary" icon="el-icon-plus" size="mini"  round>新增</el-button> -->
-                <el-button type="primary" size="mini" v-waves round @click="changeStatus(1)">启用</el-button>
-                <el-button type="warning" size="mini" v-waves round @click="changeStatus(0)">禁用</el-button>
-              </div0
-              <div>
-                  <ul>
-                    <li v-for=" item in parentRouters" :key="item.routerId " >
-                      <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
-                        <span>
-                          {{item.name}}
-                        </span>
-                        <el-tag size="mini">{{item.status | statusFilter}}</el-tag>
-                      </el-button>
-                    </li>
-                </ul>
+                <el-button type="success" size="mini" v-waves round @click="changeStatus(1)">启用</el-button>
+                <el-button type="danger" size="mini" v-waves round @click="changeStatus(0)">禁用</el-button>
+              </div>
+              <div >
+                <div class="mainlist" v-for=" item in parentRouters" :key="item.routerId" >
+                  <el-button type="text" @click="change(item.routerId)" :class="{'onClicked' : item.routerId == listQuery.routerParentId }">
+                      {{item.name}}
+                  </el-button>
+                  <span v-if="item.status == 1">
+                    <svg-icon icon-class="qiyong" />
+                  </span>
+                  <span v-else>
+                    <svg-icon icon-class="jinyong" />
+                  </span>
+                </div>
               </div>
             </el-col>
             <!-- 二级菜单 -->
             <el-col :span="20">
                 <div>
                   <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row >
-                    <el-table-column align="center" prop="routerId" label='序号'  >
+                    <el-table-column align="center" prop="routerId" label='序号'>
                       <template slot-scope="scope">
                         <span>{{scope.row.routerId}}</span>
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" prop="path" label='路由请求路径'  >
+                    <el-table-column align="center" prop="path" label='路由请求路径'>
                       <template slot-scope="scope">
                         <span>{{scope.row.path}}</span>
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" prop="component" label='组件'  >
+                    <el-table-column align="center" prop="component" label='组件'>
                       <template slot-scope="scope">
                         <span>{{scope.row.component}}</span>
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" prop="title" label='标题'  >
+                    <el-table-column align="center" prop="title" label='标题'>
                       <template slot-scope="scope">
                         <span>{{scope.row.title}}</span>
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" prop="updateTime" label='更新时间'  >
+                    <el-table-column align="center" prop="updateTime" label='更新时间'>
                       <template slot-scope="scope">
                         <span>{{scope.row.updateTime}}</span>
                       </template>
                     </el-table-column>                    
-                    <el-table-column align="center" prop="createTime" label='创建时间'  >
+                    <el-table-column align="center" prop="createTime" label='创建时间'>
                       <template slot-scope="scope">
                         <span>{{scope.row.createTime}}</span>
                       </template>
                     </el-table-column>   
-                    <el-table-column align="center" prop="status" label='使用状态'  >
+                    <el-table-column align="center" prop="status" label='使用状态'>
                       <template slot-scope="scope">
                         <span>{{scope.row.status | statusFilter }}</span>
                       </template>
                     </el-table-column>
-                      <el-table-column align="center" label="操作" width="230" class-name="small-padding fixed-width">
+                      <el-table-column align="center" label="操作" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                          <el-button size="mini" type="primary" @click="handleModifyStatus(scope.row,1)" round v-waves >启用</el-button>
-                          <el-button size="mini" type="warning" @click="handleModifyStatus(scope.row,0)" round v-waves >禁用</el-button>
+                          <el-button size="mini" type="success" @click="handleModifyStatus(scope.row,1)" round v-waves >启用</el-button>
+                          <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,0)" round v-waves >禁用</el-button>
                         </template>
                     </el-table-column>
                   </el-table>
@@ -139,27 +139,6 @@ export default {
         return item.routerId === this.listQuery.routerParentId
       })
       this.handleModifyStatus(_router, status)
-      // if (status === _router.status) {
-      //   this.$message({
-      //     message: '操作无效！',
-      //     type: 'warning'
-      //   })
-      // } else {
-      //   const router = {
-      //     routerId: _router.routerId,
-      //     status: status
-      //   }
-      //   update(router).then(response => {
-      //     this.getParents()
-      //     this.$message({
-      //       message: '操作成功',
-      //       type: 'success'
-      //     })
-      //   }).catch(err => {
-      //     console.log(err)
-      //     this.$message.error('操作失败！')
-      //   })
-      // }
     },
     handleModifyStatus(_router, status) {
       if (status === _router.status) {
@@ -201,7 +180,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 ul {
   list-style-type:none;
 }
@@ -209,6 +188,12 @@ ul {
   color: #F56C6C
 }
 
-
-
+.mainlist {
+    margin: 10px 20px;
+    border-bottom: 1px dashed #d2d3d2;
+    text-align: center;
+    button {
+      width: 80%;
+    }
+  }
 </style>
