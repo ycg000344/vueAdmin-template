@@ -32,7 +32,7 @@
         placement="right"
         trigger="hover">
         <el-button slot="reference" type="primary">h5</el-button>
-        <img src="@/assets/h5.png" />
+        <img src="@/assets/h5.png" height="200" width="200" />
       </el-popover>
     </el-form>
 
