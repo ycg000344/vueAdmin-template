@@ -5,7 +5,7 @@
             <el-col :span="4">
               <div>
                 <el-button type="success" size="mini" v-waves round @click="changeStatus(1)">启用</el-button>
-                <el-button type="danger" size="mini" v-waves round @click="changeStatus(0)">禁用</el-button>
+                <!-- <el-button type="danger" size="mini" v-waves round @click="changeStatus(0)">禁用</el-button> -->
               </div>
               <div >
                 <div class="mainlist" v-for=" item in parentRouters" :key="item.routerId" >
@@ -63,7 +63,7 @@
                       <el-table-column align="center" label="操作" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                           <el-button size="mini" type="success" @click="handleModifyStatus(scope.row,1)" round v-waves >启用</el-button>
-                          <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,0)" round v-waves >禁用</el-button>
+                          <!-- <el-button size="mini" type="danger" @click="handleModifyStatus(scope.row,0)" round v-waves >禁用</el-button> -->
                         </template>
                     </el-table-column>
                   </el-table>
